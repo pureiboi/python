@@ -7,7 +7,13 @@ FG_base = ['R','Q','P','N','M','L','K','X','W','U','T']
 weight = [2,7,6,5,4,3,2]
 
 def isValidNric(nric = ""):
+    """
+    :param nric: format in XnnnnnnnX, n=number, X=alphabet
+    :return: boolean, valid=true, invalid=false
+    """
     if len(nric) != 9:
+        return False
+    if not nric[1:len(nric)-1].isdigit():
         return False
     if nric[len(nric)-1] != getCheckDigit(nric):
         return False
@@ -15,7 +21,7 @@ def isValidNric(nric = ""):
 
 
 def getCheckDigit(nric = ""):
-
+    """ generate check digit for last character """
     digits = nric[1:len(nric)-1]
     sum = 0
     idx = 0
@@ -34,7 +40,11 @@ def getCheckDigit(nric = ""):
 
 
 def generateNric(prefixz="", digitz=""):
-
+    """
+    :param prefixz: either S, T, F, G, randomly generated when not provided
+    :param digitz: digit to prefix e.g when 87, then X87nnnnnX, when 8954, then X8954nnnX
+    :return: 9 characters XnnnnnnnX, n=number, X=alphabet
+    """
     digits = digitz
     while(len(digits)!=7):
         digits = digits + str(random.randint(0, 9))
