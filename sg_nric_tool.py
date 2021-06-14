@@ -62,4 +62,16 @@ def generateNric(prefixz="", digitz=""):
     else:
         prefixz = prefixz[0].upper()
     nricPart = prefixz + digits
-    return nricPart + getCheckDigit(nricPart)
+    return nricPart + getCheckDigit(nricPart + "X")
+
+
+if __name__ == "__main__":
+
+    generationCount = 50
+    for x in range(1, generationCount):
+        digitz = "9500000"
+        digitz = digitz[0:len(digitz) - len(str(x))]
+        digitz = f"{digitz}{x}"
+        print(generateNric("t", digitz))
+
+
